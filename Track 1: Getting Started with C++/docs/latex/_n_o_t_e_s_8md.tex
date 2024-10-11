@@ -1,0 +1,81 @@
+\doxysection{/\+Users/briansaldana/\+Desktop/practice/\+Programming\+In\+C++/\+Track 1\+: Getting Started with C++/\+NOTES.md File Reference}
+\hypertarget{_n_o_t_e_s_8md}{}\label{_n_o_t_e_s_8md}\index{/Users/briansaldana/Desktop/practice/ProgrammingInC++/Track 1: Getting Started with C++/NOTES.md@{/Users/briansaldana/Desktop/practice/ProgrammingInC++/Track 1: Getting Started with C++/NOTES.md}}
+
+
+Notes contain a brief overview of important details that are going to be used in the code examples.  
+
+
+
+
+\doxysubsection{Detailed Description}
+Notes contain a brief overview of important details that are going to be used in the code examples. 
+
+
+\begin{DoxyItemize}
+\item \begin{DoxyAuthor}{Author}
+Brian Saldana
+\end{DoxyAuthor}
+
+\item \texorpdfstring{$\ast$}{*} \begin{DoxyVersion}{Version}
+1.\+0
+\end{DoxyVersion}
+
+\item \begin{DoxyDate}{Date}
+2024-\/10-\/10
+\end{DoxyDate}
+
+\item \begin{DoxyCopyright}{Copyright}
+Copyright (c) 2024 \texorpdfstring{$\ast$}{*}/ 
+\end{DoxyCopyright}
+
+\end{DoxyItemize}\hypertarget{_n_o_t_e_s_8md_autotoc_md0}{}\doxysubsection{\texorpdfstring{Introduction to Smart Pointers}{Introduction to Smart Pointers}}\label{_n_o_t_e_s_8md_autotoc_md0}
+\hypertarget{_n_o_t_e_s_8md_autotoc_md1}{}\doxysubsubsection{\texorpdfstring{Pointers before learning about smart pointers have just been "{}\+Raw Pointers"{}.}{Pointers before learning about smart pointers have just been "{}\+Raw Pointers"{}.}}\label{_n_o_t_e_s_8md_autotoc_md1}
+
+\begin{DoxyItemize}
+\item The memory management of raw pointers is manual, and the developer is responsible for allocating and freeing memory.
+\item This makes working with raw pointers prone to memory leaks and other bugs.
+\item In modern C++, you rarely work with raw pointers directly and instead work with smart pointers, which take care of the dynamic memory management for you.
+\item If using smart pointers there is no reason to be using "{}\+New"{} or "{}\+Delete"{}.
+\end{DoxyItemize}\hypertarget{_n_o_t_e_s_8md_autotoc_md2}{}\doxysubsection{\texorpdfstring{Smart Pointers}{Smart Pointers}}\label{_n_o_t_e_s_8md_autotoc_md2}
+
+\begin{DoxyItemize}
+\item Are used to manage memory allocate on the free store and in more ways act exactly as a raw pointer does.
+\item Smart pointers are allocated on the Stack, and you do not need to call delete or delete\mbox{[}\mbox{]} to free up memory.
+\item Errors such as multiple deallocations, memory leaks, and allocation/ deallocation mismatches can be eliminated.
+\item Uses a technique known as "{}\+Resource Acquistion Is Initialization"{} (RAII).
+\end{DoxyItemize}\hypertarget{_n_o_t_e_s_8md_autotoc_md3}{}\doxysubsection{\texorpdfstring{RAII}{RAII}}\label{_n_o_t_e_s_8md_autotoc_md3}
+
+\begin{DoxyItemize}
+\item C++ technique that bings the life cycle of a resource that must be acquired to the lifetime of an object.
+\item You instantiate and manage the lfetime of an object on the stack.
+\item The object on the stack takes tcare of managing your dynamically allocated resources.
+\item Smart pointers are defined templates in the memory header of the C++ Standard Library. (This means this is a built in part of the C++ language)
+\end{DoxyItemize}\hypertarget{_n_o_t_e_s_8md_autotoc_md4}{}\doxysubsection{\texorpdfstring{RAII Process}{RAII Process}}\label{_n_o_t_e_s_8md_autotoc_md4}
+
+\begin{DoxyItemize}
+\item Object is created on the stack \textbackslash{}to Constructor acquires resources on the free store \textbackslash{}to Destructor frees resources on the free store
+\end{DoxyItemize}\hypertarget{_n_o_t_e_s_8md_autotoc_md5}{}\doxysubsection{\texorpdfstring{Types of Smart Pointers}{Types of Smart Pointers}}\label{_n_o_t_e_s_8md_autotoc_md5}
+\hypertarget{_n_o_t_e_s_8md_autotoc_md6}{}\doxysubsubsection{\texorpdfstring{unique\+\_\+ptr$<$\+T$>$}{unique\+\_\+ptr$<$\+T$>$}}\label{_n_o_t_e_s_8md_autotoc_md6}
+
+\begin{DoxyItemize}
+\item behaves like a pointer to a type T and is unique -- only one pointer containing the memory address can exist.
+\item A unique pointer exclusively own whatever it points to.
+\item There can only be one unique pointer pointing to a certain memory address at any point.
+\item A unique pointer cannot be copied since the compiler will not allow this.
+\end{DoxyItemize}\hypertarget{_n_o_t_e_s_8md_autotoc_md7}{}\doxysubsubsection{\texorpdfstring{shared\+\_\+ptr$<$\+T$>$}{shared\+\_\+ptr$<$\+T$>$}}\label{_n_o_t_e_s_8md_autotoc_md7}
+
+\begin{DoxyItemize}
+\item behaves like a pointer to a type T -- there can be any number of shared pointers for the same resource.
+\item Difference between a shared pointer and a unique pointer is that with a shared pointer there can be any number of shared pointers pointing to the same underlying resource. -- the shared pointer implemention is smart enough to figure out that the underlying resource should not be cleaned up as long as there is at least 1 shared pointer pointing to it.
+\item How does it know that there is even 1 shared pointer left ? -- because of something known as the resource counting.
+\item Every shared pointer keeps track of the nuber of "{}strong"{} and "{}weak"{} references to the underlying memory.
+\item Strong references are incrememnted each time a new shared pointer references the same memory, such as when a pointer is copied.
+\item Strong references are decrememnted each time a shared pointer releases memory or goes out of scope. -- underlying memory is only freed when the number of strong references reaches zero.
+\end{DoxyItemize}\hypertarget{_n_o_t_e_s_8md_autotoc_md8}{}\doxysubsubsection{\texorpdfstring{weak\+\_\+ptr$<$\+T$>$}{weak\+\_\+ptr$<$\+T$>$}}\label{_n_o_t_e_s_8md_autotoc_md8}
+
+\begin{DoxyItemize}
+\item is linked to a shared\+\_\+ptr$<$\+T$>$ and points to the same resource -- it does not increment the reference count.
+\item weak\+\_\+ptr can not have an independent existance.
+\item shared\+\_\+ptr sets a strong reference count, but because weak\+\_\+ptr does not incrememnt the reference count, this means that we can deallocate/ clean up our references although there are some weak\+\_\+ptr\textquotesingle{}s that exist.
+\item Weak pointers exist and are used to mitigate circular references, which cause memory leaks. 
+\end{DoxyItemize}
